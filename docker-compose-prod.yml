@@ -1,0 +1,19 @@
+jhipster-prod-elasticsearch:
+  container_name: tenderguru-prod-elasticsearch
+  image: elasticsearch
+  # volumes:
+  # - ~/volumes/jhipster/tenderguru/prod-elasticsearch/:/usr/share/elasticsearch/data/
+  ports:
+  - "9200:9200"
+  - "9300:9300"
+jhipster-prod-postgresql:
+  container_name: tenderguru-prod-postgresql
+  image: postgres
+  # volumes:
+  # - ~/volumes/jhipster/tenderguru/prod-postgresql/:/var/lib/postgresql/
+  environment:
+  - POSTGRES_USER=tenderguru
+  - POSTGRES_PASSWORD=
+  ports:
+  - "5432:5432"
+

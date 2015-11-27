@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "tenderguru",
+    "packageName": "com.gof.tenderguru",
+    "packageFolder": "com/gof/tenderguru",
+    "authenticationType": "oauth2",
+    "hibernateCache": "hazelcast",
+    "clusteredHttpSession": "hazelcast",
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "useSass": true,
+    "buildTool": "maven",
+    "frontendBuilder": "gulp",
+    "enableTranslation": true,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "18225f7a243d43d70f38f3ab25795b216f9471eb",
+    "testFrameworks": [
+      "cucumber"
+    ]
+  }
+}
