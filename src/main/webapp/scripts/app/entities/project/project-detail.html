@@ -1,0 +1,88 @@
+
+<div>
+    <h2><span>Project</span> {{project.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.name}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Content</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.content}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Vote</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.vote}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>bidder</span>
+                </td>
+                <td>
+                    <span ng-repeat="bidder in project.bidders">
+                        <a class="form-control-static" ui-sref="contractor.detail({id: {{bidder.id}}})">{{bidder.name}}</a>{{$last ? '' : ', '}}
+                    <span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>owner</span>
+                </td>
+                <td>
+                    {{project.owner.name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>winner</span>
+                </td>
+                <td>
+                    {{project.winner.name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>bid_winner</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="contractor.detail({id:project.bid_winner.id})">{{project.bid_winner.name}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

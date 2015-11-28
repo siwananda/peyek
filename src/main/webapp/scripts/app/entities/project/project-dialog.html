@@ -1,0 +1,106 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myProjectLabel">Create or edit a Project</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="project.id" readonly />
+        </div>
+        <div class="form-group">
+            <label for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="project.name"
+                    required ng-minlength="10" ng-maxlength="100" />
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.name.$error.minlength" translate-value-min="10">
+                    This field is required to be at least 10 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.name.$error.maxlength" translate-value-max="100">
+                    This field cannot be longer than 100 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="project.description"
+                    required ng-minlength="50" ng-maxlength="200" />
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.description.$error.minlength" translate-value-min="50">
+                    This field is required to be at least 50 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.description.$error.maxlength" translate-value-max="200">
+                    This field cannot be longer than 200 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_content">Content</label>
+            <input type="text" class="form-control" name="content" id="field_content"
+                    ng-model="project.content"
+                    ng-maxlength="5000" />
+            <div ng-show="editForm.content.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.content.$error.maxlength" translate-value-max="5000">
+                    This field cannot be longer than 5000 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_vote">Vote</label>
+            <input type="number" class="form-control" name="vote" id="field_vote"
+                    ng-model="project.vote"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_bidder">bidder</label>
+            <select class="form-control" id="field_bidder" multiple name="bidder" ng-model="project.bidders" ng-options="contractor as contractor.name for contractor in contractors track by contractor.id"></select>
+        </div>
+        <div class="form-group">
+            <label for="field_owner">owner</label>
+            <select class="form-control" id="field_owner" name="owner" ng-model="project.owner" ng-options="user as user.name for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_winner">winner</label>
+            <select class="form-control" id="field_winner" name="winner" ng-model="project.winner" ng-options="user as user.name for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_bid_winner">bid_winner</label>
+            <select class="form-control" id="field_bid_winner" name="bid_winner" ng-model="project.bid_winner" ng-options="contractor as contractor.name for contractor in contractors track by contractor.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
