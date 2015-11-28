@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .factory('AuditsService', function ($http) {
         return {
             findAll: function () {

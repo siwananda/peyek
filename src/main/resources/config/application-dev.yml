@@ -19,30 +19,20 @@ spring:
         livereload:
             enabled: false # we use Grunt + BrowserSync for livereload
     datasource:
-        driver-class-name: org.h2.jdbcx.JdbcDataSource
-        url: jdbc:h2:mem:jhipster;DB_CLOSE_DELAY=-1
-        name:
-        username: 
-        password:
+        driver-class-name: org.postgresql.ds.PGSimpleDataSource
+        url: jdbc:postgresql://localhost:5432/peyek
+        name: peyek
+        username: peyek
+        password: peyek
     jpa:
-        database-platform: com.gof.tenderguru.domain.util.FixedH2Dialect
-        database: H2
+        database-platform: io.gof.peyek.domain.util.FixedPostgreSQL82Dialect
+        database: POSTGRESQL
         show_sql: true
         properties:
             hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-            hibernate.cache.region.factory_class: com.gof.tenderguru.config.hazelcast.HazelcastCacheRegionFactory
-            hibernate.cache.use_minimal_puts: true
-            hibernate.cache.hazelcast.use_lite_member: true
-    data:
-        elasticsearch:
-            cluster-name:
-            cluster-nodes:
-            properties:
-                path:
-                  logs: target/elasticsearch/log
-                  data: target/elasticsearch/data
+            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
     mail:
         host: localhost
     messages:
@@ -54,7 +44,7 @@ liquibase:
     contexts: dev
 
 server:
-    port: 8080
+    port: 8082
 
 # ===================================================================
 # JHipster specific properties
@@ -63,10 +53,10 @@ server:
 jhipster:
     cache: # Hibernate 2nd level cache, used by CacheConfiguration
         timeToLiveSeconds: 3600
-        hazelcast:
-            backupCount: 1
+        ehcache:
+            maxBytesLocalHeap: 16M
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: tenderguru@localhost
+        from: peyek@localhost
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         spark:
@@ -77,4 +67,4 @@ jhipster:
             enabled: false
             host: localhost
             port: 2003
-            prefix: tenderguru
+            prefix: peyek

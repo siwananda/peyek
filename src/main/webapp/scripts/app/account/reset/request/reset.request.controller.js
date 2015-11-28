@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .controller('RequestResetController', function ($rootScope, $scope, $state, $timeout, Auth) {
 
         $scope.success = null;

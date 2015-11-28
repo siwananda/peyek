@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .controller('AuditsController', function ($scope, $filter, AuditsService) {
         $scope.onChangeDate = function () {
             var dateFormat = 'yyyy-MM-dd';

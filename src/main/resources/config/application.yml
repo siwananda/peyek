@@ -38,21 +38,28 @@ jhipster:
         corePoolSize: 2
         maxPoolSize: 50
         queueCapacity: 10000
+    #cors: #By default CORS are not enabled. Uncomment to enable.
+        #allowed-origins: "*"
+        #allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+        #allowed-headers: "*"
+        #exposed-headers:
+        #allow-credentials: true
+        #max-age: 1800
     mail:
-        from: tenderguru@localhost
+        from: peyek@localhost
     security:
         authentication:
             oauth:
-                clientid: tenderguruapp
+                clientid: peyekapp
                 secret: mySecretOAuthSecret
                 # Token is valid 30 minutes
                 tokenValidityInSeconds: 1800
         rememberme:
             # security key (this key should be unique for your application, and kept secret)
-            key: 18225f7a243d43d70f38f3ab25795b216f9471eb
+            key: d29cfa4d096eb0607bbfc4d26e88ade8c5679fd4
     swagger:
-        title: tenderguru API
-        description: tenderguru API documentation
+        title: peyek API
+        description: peyek API documentation
         version: 0.0.1
         termsOfServiceUrl:
         contact:

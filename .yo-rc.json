@@ -1,24 +1,22 @@
 {
   "generator-jhipster": {
-    "baseName": "tenderguru",
-    "packageName": "com.gof.tenderguru",
-    "packageFolder": "com/gof/tenderguru",
+    "baseName": "peyek",
+    "packageName": "io.gof.peyek",
+    "packageFolder": "io/gof/peyek",
     "authenticationType": "oauth2",
-    "hibernateCache": "hazelcast",
-    "clusteredHttpSession": "hazelcast",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
     "websocket": "spring-websocket",
     "databaseType": "sql",
-    "devDatabaseType": "h2Memory",
+    "devDatabaseType": "postgresql",
     "prodDatabaseType": "postgresql",
-    "searchEngine": "elasticsearch",
+    "searchEngine": "no",
     "useSass": true,
     "buildTool": "maven",
     "frontendBuilder": "gulp",
-    "enableTranslation": true,
+    "enableTranslation": false,
     "enableSocialSignIn": false,
-    "rememberMeKey": "18225f7a243d43d70f38f3ab25795b216f9471eb",
-    "testFrameworks": [
-      "cucumber"
-    ]
+    "rememberMeKey": "d29cfa4d096eb0607bbfc4d26e88ade8c5679fd4",
+    "testFrameworks": []
   }
 }

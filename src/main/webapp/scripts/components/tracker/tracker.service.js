@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .factory('Tracker', function ($rootScope, $cookies, $http, $q) {
         var stompClient = null;
         var subscriber = null;

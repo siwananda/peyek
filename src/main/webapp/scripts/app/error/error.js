@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('error', {
@@ -8,7 +8,7 @@ angular.module('tenderguruApp')
                 url: '/error',
                 data: {
                     authorities: [],
-                    pageTitle: 'error.title'
+                    pageTitle: 'Error page!'
                 },
                 views: {
                     'content@': {
@@ -16,10 +16,7 @@ angular.module('tenderguruApp')
                     }
                 },
                 resolve: {
-                    mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
-                        $translatePartialLoader.addPart('error');
-                        return $translate.refresh();
-                    }]
+                    
                 }
             })
             .state('accessdenied', {
@@ -34,10 +31,7 @@ angular.module('tenderguruApp')
                     }
                 },
                 resolve: {
-                    mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
-                        $translatePartialLoader.addPart('error');
-                        return $translate.refresh();
-                    }]
+                    
                 }
             });
     });

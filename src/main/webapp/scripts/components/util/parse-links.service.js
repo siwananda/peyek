@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .service('ParseLinks', function () {
         this.parse = function (header) {
             if (header.length == 0) {

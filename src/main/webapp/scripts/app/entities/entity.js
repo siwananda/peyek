@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('entity', {

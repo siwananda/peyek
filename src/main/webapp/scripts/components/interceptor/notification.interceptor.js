@@ -1,12 +1,12 @@
  'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .factory('notificationInterceptor', function ($q, AlertService) {
         return {
             response: function(response) {
-                var alertKey = response.headers('X-tenderguruApp-alert');
+                var alertKey = response.headers('X-peyekApp-alert');
                 if (angular.isString(alertKey)) {
-                    AlertService.success(alertKey, { param : response.headers('X-tenderguruApp-params')});
+                    AlertService.success(alertKey, { param : response.headers('X-peyekApp-params')});
                 }
                 return response;
             }

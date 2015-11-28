@@ -1,4 +1,4 @@
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('tracker', {
@@ -6,7 +6,7 @@ angular.module('tenderguruApp')
                 url: '/tracker',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'tracker.title'
+                    pageTitle: 'Real-time user activities'
                 },
                 views: {
                     'content@': {
@@ -15,10 +15,7 @@ angular.module('tenderguruApp')
                     }
                 },
                 resolve: {
-                    mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('tracker');
-                        return $translate.refresh();
-                    }]
+                    
                 },
                 onEnter: function(Tracker) {
                     Tracker.subscribe();

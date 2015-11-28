@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('tenderguruApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pascalprecht.translate', 
-               'ui.bootstrap', // for modal dialogs
-    'ngResource', 'ui.router', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload', 'infinite-scroll'])
+angular.module('peyekApp', ['LocalStorageModule', 
+    'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload',
+    'ui.bootstrap', 'ui.router',  'infinite-scroll', 'angular-loading-bar'])
 
-    .run(function ($rootScope, $location, $window, $http, $state, $translate, Language, Auth, Principal, ENV, VERSION) {
+    .run(function ($rootScope, $location, $window, $http, $state,  Auth, Principal, ENV, VERSION) {
+        
         $rootScope.ENV = ENV;
         $rootScope.VERSION = VERSION;
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
@@ -15,15 +16,10 @@ angular.module('tenderguruApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
                 Auth.authorize();
             }
             
-            // Update the language
-            Language.getCurrent().then(function (language) {
-                $translate.use(language);
-            });
-            
         });
 
         $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
-            var titleKey = 'global.title' ;
+            var titleKey = 'peyek' ;
 
             // Remember previous state unless we've been redirected to login or we've just
             // reset the state memory after logout. If we're redirected to login, our
@@ -38,14 +34,9 @@ angular.module('tenderguruApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
             if (toState.data.pageTitle) {
                 titleKey = toState.data.pageTitle;
             }
-            
-            $translate(titleKey).then(function (title) {
-                // Change window title with translated one
-                $window.document.title = title;
-            });
-            
+            $window.document.title = titleKey;
         });
-
+        
         $rootScope.back = function() {
             // If previous state is 'activate' or do not exist go to 'home'
             if ($rootScope.previousStateName === 'activate' || $state.get($rootScope.previousStateName) === null) {
@@ -55,7 +46,9 @@ angular.module('tenderguruApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
             }
         };
     })
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,  httpRequestInterceptorCacheBusterProvider, AlertServiceProvider) {
+        // uncomment below to make alerts look like toast
+        //AlertServiceProvider.showAsToast(true);
 
         //Cache everything except rest api requests
         httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);
@@ -74,10 +67,7 @@ angular.module('tenderguruApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
                     function (Auth) {
                         return Auth.authorize();
                     }
-                ],
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('global');
-                }]
+                ]
             }
         });
 
@@ -85,20 +75,6 @@ angular.module('tenderguruApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
         $httpProvider.interceptors.push('authExpiredInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
         $httpProvider.interceptors.push('notificationInterceptor');
-        
-        // Initialize angular-translate
-        $translateProvider.useLoader('$translatePartialLoader', {
-            urlTemplate: 'i18n/{lang}/{part}.json'
-        });
-
-        $translateProvider.preferredLanguage('en');
-        $translateProvider.useCookieStorage();
-        $translateProvider.useSanitizeValueStrategy('escaped');
-        $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
-
-        tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
-        tmhDynamicLocaleProvider.useCookieStorage();
-        tmhDynamicLocaleProvider.storageKey('NG_TRANSLATE_LANG_KEY');
         
     })
     .config(['$urlMatcherFactoryProvider', function($urlMatcherFactory) {

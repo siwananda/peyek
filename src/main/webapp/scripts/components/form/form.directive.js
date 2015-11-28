@@ -1,7 +1,7 @@
 /* globals $ */
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .directive('showValidation', function() {
         return {
             restrict: 'A',

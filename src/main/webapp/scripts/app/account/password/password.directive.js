@@ -1,7 +1,7 @@
 /* globals $ */
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .directive('passwordStrengthBar', function () {
         return {
             replace: true,

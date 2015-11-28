@@ -1,8 +1,8 @@
 /* globals $ */
 'use strict';
 
-angular.module('tenderguruApp')
-    .directive('tenderguruAppPagination', function() {
+angular.module('peyekApp')
+    .directive('peyekAppPagination', function() {
         return {
             templateUrl: 'scripts/components/form/pagination.html'
         };

@@ -1,17 +1,17 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .factory('AuthServerProvider', function loginService($http, localStorageService, Base64) {
         return {
             login: function(credentials) {
                 var data = "username=" +  encodeURIComponent(credentials.username) + "&password="
                     + encodeURIComponent(credentials.password) + "&grant_type=password&scope=read%20write&" +
-                    "client_secret=mySecretOAuthSecret&client_id=tenderguruapp";
+                    "client_secret=mySecretOAuthSecret&client_id=peyekapp";
                 return $http.post('oauth/token', data, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                         "Accept": "application/json",
-                        "Authorization": "Basic " + Base64.encode("tenderguruapp" + ':' + "mySecretOAuthSecret")
+                        "Authorization": "Basic " + Base64.encode("peyekapp" + ':' + "mySecretOAuthSecret")
                     }
                 }).success(function (response) {
                     var expiredAt = new Date();

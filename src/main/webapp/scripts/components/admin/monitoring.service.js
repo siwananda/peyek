@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .factory('MonitoringService', function ($rootScope, $http) {
         return {
             getMetrics: function () {

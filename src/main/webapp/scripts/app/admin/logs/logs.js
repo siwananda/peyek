@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('logs', {
@@ -8,7 +8,7 @@ angular.module('tenderguruApp')
                 url: '/logs',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'logs.title'
+                    pageTitle: 'Logs'
                 },
                 views: {
                     'content@': {
@@ -17,10 +17,7 @@ angular.module('tenderguruApp')
                     }
                 },
                 resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('logs');
-                        return $translate.refresh();
-                    }]
+                    
                 }
             });
     });

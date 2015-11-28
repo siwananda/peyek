@@ -1,12 +1,14 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .directive('jhAlert', function(AlertService) {
         return {
             restrict: 'E',
             template: '<div class="alerts" ng-cloak="">' +
-                            '<alert ng-cloak="" ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()"><pre>{{ alert.msg }}</pre></alert>' +
-                        '</div>',
+                            '<div ng-repeat="alert in alerts" ng-class="[alert.position, {\'toast\': alert.toast}]">' +
+                                '<alert ng-cloak="" type="{{alert.type}}" close="alert.close()"><pre>{{ alert.msg }}</pre></alert>' +
+                            '</div>' +
+                      '</div>',
             controller: ['$scope',
                 function($scope) {
                     $scope.alerts = AlertService.get();
@@ -17,17 +19,20 @@ angular.module('tenderguruApp')
             ]
         }
     })
-    .directive('jhAlertError', function(AlertService, $rootScope, $translate) {
+    .directive('jhAlertError', function(AlertService, $rootScope) {
         return {
             restrict: 'E',
             template: '<div class="alerts" ng-cloak="">' +
-                            '<alert ng-cloak="" ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()"><pre>{{ alert.msg }}</pre></alert>' +
-                        '</div>',
+                            '<div ng-repeat="alert in alerts" ng-class="[alert.position, {\'toast\': alert.toast}]">' +
+                                '<alert ng-cloak="" type="{{alert.type}}" close="alert.close(alerts)"><pre>{{ alert.msg }}</pre></alert>' +
+                            '</div>' +
+                      '</div>',
             controller: ['$scope',
                 function($scope) {
-                    $scope.alerts = AlertService.get();
 
-                    var cleanHttpErrorListener = $rootScope.$on('tenderguruApp.httpError', function (event, httpResponse) {
+                    $scope.alerts = [];
+
+                    var cleanHttpErrorListener = $rootScope.$on('peyekApp.httpError', function (event, httpResponse) {
                         var i;
                         event.stopPropagation();
                         switch (httpResponse.status) {
@@ -42,13 +47,13 @@ angular.module('tenderguruApp')
                                         var fieldError = httpResponse.data.fieldErrors[i];
                                         // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
                                         var convertedField = fieldError.field.replace(/\[\d*\]/g, "[]");
-                                        var fieldName = $translate.instant('tenderguruApp.' + fieldError.objectName + '.' + convertedField);
+                                        var fieldName = convertedField.charAt(0).toUpperCase() + convertedField.slice(1);
                                         addErrorAlert('Field ' + fieldName + ' cannot be empty', 'error.' + fieldError.message, {fieldName: fieldName});
                                     }
                                 } else if (httpResponse.data && httpResponse.data.message) {
-                                  addErrorAlert(httpResponse.data.message, httpResponse.data.message, httpResponse.data);
+                                    addErrorAlert(httpResponse.data.message, httpResponse.data.message, httpResponse.data);
                                 } else {
-                                  addErrorAlert(httpResponse.data);
+                                    addErrorAlert(httpResponse.data);
                                 }
                                 break;
 
@@ -64,14 +69,23 @@ angular.module('tenderguruApp')
                     $scope.$on('$destroy', function () {
                         if(cleanHttpErrorListener !== undefined && cleanHttpErrorListener !== null){
                             cleanHttpErrorListener();
+                            $scope.alerts = [];
                         }
                     });
 
                     var addErrorAlert = function (message, key, data) {
-                        
-                        key = key && key != null ? key : message;
-                        AlertService.error(key, data); 
-
+                        $scope.alerts.push(
+                            AlertService.add(
+                                {
+                                    type: "danger",
+                                    msg: message,
+                                    timeout: 5000,
+                                    toast: AlertService.isToast(),
+                                    scoped: true
+                                },
+                                $scope.alerts
+                            )
+                        );
                     }
                 }
             ]

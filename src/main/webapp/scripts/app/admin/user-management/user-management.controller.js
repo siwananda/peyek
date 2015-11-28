@@ -1,12 +1,9 @@
 'use strict';
 
-angular.module('tenderguruApp')
-    .controller('UserManagementController', function ($scope, User, ParseLinks, Language) {
+angular.module('peyekApp')
+    .controller('UserManagementController', function ($scope, User, ParseLinks) {
         $scope.users = [];
         $scope.authorities = ["ROLE_USER", "ROLE_ADMIN"];
-        Language.getAll().then(function (languages) {
-            $scope.languages = languages;
-        });
 
         $scope.page = 0;
         $scope.loadAll = function () {
@@ -28,26 +25,6 @@ angular.module('tenderguruApp')
                 $scope.loadAll();
                 $scope.clear();
             });
-        };
-
-        $scope.showUpdate = function (login) {
-            User.get({login: login}, function (result) {
-                $scope.user = result;
-                $('#saveUserModal').modal('show');
-            });
-        };
-
-        $scope.save = function () {
-            User.update($scope.user,
-                function () {
-                    $scope.refresh();
-                });
-        };
-
-        $scope.refresh = function () {
-            $scope.loadAll();
-            $('#saveUserModal').modal('hide');
-            $scope.clear();
         };
 
         $scope.clear = function () {

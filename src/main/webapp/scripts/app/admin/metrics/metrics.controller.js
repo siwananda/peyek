@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tenderguruApp')
+angular.module('peyekApp')
     .controller('MetricsController', function ($scope, MonitoringService, $modal) {
         $scope.metrics = {};
         $scope.updatingMetrics = true;
@@ -49,7 +49,7 @@ angular.module('tenderguruApp')
                     size: 'lg',
                     resolve: {
                         threadDump: function() {
-                            return data;
+                            return data.content;
                         }
 
                     }

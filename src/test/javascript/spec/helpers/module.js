@@ -1,4 +1,4 @@
-beforeEach(module('tenderguruApp'));
+beforeEach(module('peyekApp'));
 /**
  * returns a function whose angular will be replaced
  * with whatever mock was supplied.

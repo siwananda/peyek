@@ -2,7 +2,7 @@
 
 describe('Controllers Tests ', function () {
 
-    beforeEach(module('tenderguruApp'));
+    beforeEach(module('peyekApp'));
 
     describe('LoginController', function () {
         var $scope;

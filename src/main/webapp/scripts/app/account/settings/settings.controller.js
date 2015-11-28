@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('tenderguruApp')
-    .controller('SettingsController', function ($scope, Principal, Auth, Language, $translate) {
+angular.module('peyekApp')
+    .controller('SettingsController', function ($scope, Principal, Auth) {
         $scope.success = null;
         $scope.error = null;
         Principal.identity(true).then(function(account) {
@@ -14,11 +14,6 @@ angular.module('tenderguruApp')
                 $scope.success = 'OK';
                 Principal.identity().then(function(account) {
                     $scope.settingsAccount = account;
-                });
-                Language.getCurrent().then(function(current) {
-                    if ($scope.settingsAccount.langKey !== current) {
-                        $translate.use($scope.settingsAccount.langKey);
-                    }
                 });
             }).catch(function() {
                 $scope.success = null;
